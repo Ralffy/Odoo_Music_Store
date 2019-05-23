@@ -29,7 +29,8 @@ class client_information(models.Model):
     middlename = fields.Char(string="Middle Name:", required=True)
     lastname = fields.Char(string="Last Name:", required=True)
     clientname = fields.Char(compute='complete_name', string="Full Name:")
-    bday = fields.Date(string="Birth date:", selection='someinfobutton',  default=datetime.today(), required=True)
+    bday = fields.Date(string="Birth date:", selection='someinfobutton',
+                       default=datetime.today(), required=True)
     age = fields.Char(compute='compute_age', string="Age")
     state = fields.Selection(selection=[
         ('clientname', 'Client Name'),
@@ -41,15 +42,21 @@ class client_information(models.Model):
     def compute_age(self):
         for record in self:
             if record.bday is not False:
-                calculated_bday = (datetime.today().date() - datetime.strptime(record.bday, '%Y-%m-%d').date())
+                calculated_bday = (datetime.today().date() -
+                                   datetime.strptime(record.bday, '%Y-%m-%d')
+                                   .date())
                 record.age = (calculated_bday.days // 365)
 
     @api.depends('firstname','middlename','lastname')
     def complete_name(self):
         for record in self:
             if record.firstname and record.middlename and record.lastname:
-                record.name = record.firstname +" "+record.middlename+" " +record.lastname
-                record.clientname = record.firstname +" "+record.middlename+" " +record.lastname
+                record.name = (record.firstname+" "
+                                +record.middlename+" "
+                                +record.lastname)
+                record.clientname = (record.firstname+" "
+                                    +record.middlename+" "
+                                    +record.lastname)
 
     @api.multi
     def clientnamebutton(self):
@@ -68,10 +75,13 @@ class music_store(models.Model):
 
     name=fields.Char(compute="get_name",string="Name")
     client_id= fields.Many2one('new_client_info', string="Client Name")
-    datepurchase = fields.Date(string="Date of purchase:", default=datetime.today(), required=True)
-    purchase_line_ids =  fields.One2many('new_purchase_lines', 'store_id', string="Song Name")
+    datepurchase = fields.Date(string="Date of purchase:",
+                               default=datetime.today(), required=True)
+    purchase_line_ids =  fields.One2many('new_purchase_lines', 'store_id',
+                                         string="Song Name")
     total = fields.Float(compute="compute_lines_total", string="Total:")
-    discounted = fields.Float(compute="compute_lines_discount", string="Discount:")
+    discounted = fields.Float(compute="compute_lines_discount",
+                              string="Discount:")
     state = fields.Selection(selection=[
         ('approve', 'Approved')
     ], default='approve', string="Approved")
@@ -153,7 +163,8 @@ class purchase_lines(models.Model):
     quantity = fields.Integer(string="Quantity:")
     discount = fields.Float(string="Discount:")
     amount = fields.Float(compute="get_total", string="Total:")
-    discount_invi = fields.Float(compute="get_total", string="Invisible Discount Amount")
+    discount_invi = fields.Float(compute="get_total",
+                                 string="Invisible Discount Amount")
     total = fields.Float(string="total amount")
 
     @api.depends('quantity','discount')

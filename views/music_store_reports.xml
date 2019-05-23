@@ -24,8 +24,10 @@
                       table, td, tr, th { border: 1px solid black;}
                       th {background-color: #f2f2f2;}
                     </style>
-                  <span class="col-xs-8">Client Name: <strong t-raw="record.name"/> </span>
-                  <span class="col-xs-4">Date of Purchase: <strong t-raw="record.datepurchase"/> </span>
+                  <span class="col-xs-8">Client Name:
+                    <strong t-raw="record.name"/> </span>
+                  <span class="col-xs-4">Date of Purchase:
+                    <strong t-raw="record.datepurchase"/> </span>
                     <div class="oe_structure"/>
                 </div>
                 <div class="col-xs-12" style="margin-bottom: 40px">
@@ -53,10 +55,16 @@
                 <div class="row" style="float: left; margin-left: 10px;">
                   <div class="col-xs-12">
                     <span>Total: <strong t-raw="record.total"/> </span><br/>
-                    <span>Discount: <strong t-raw="record.discounted"/> </span><br/>
-                    <span>Type of Discount: <strong t-raw="record.state_button"/> </span><br/>
-                    <span t-if="record.state_button == 'percentage'">Discounted Percentage: <strong t-raw="record.percentage_discount"/> </span>
-                    <span t-if="record.state_button == 'amount'">Discounted Amount: <strong t-raw="record.amount_discount"/> </span>
+                    <span>Discount:
+                      <strong t-raw="record.discounted"/> </span><br/>
+                    <span>Type of Discount:
+                      <strong t-raw="record.state_button"/> </span><br/>
+                    <span t-if="record.state_button == 'percentage'">
+                      Discounted Percentage:
+                      <strong t-raw="record.percentage_discount"/> </span>
+                    <span t-if="record.state_button == 'amount'">
+                      Discounted Amount:
+                      <strong t-raw="record.amount_discount"/> </span>
                   </div>
                 </div>
             </div>

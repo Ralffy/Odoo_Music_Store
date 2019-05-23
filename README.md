@@ -1,4 +1,5 @@
-Music Store
+Music Library Store
 ===========
 
-Created Simple module
+Created Music Libary Store, to simple apply knowledge about basic
+function in Odoo 8.

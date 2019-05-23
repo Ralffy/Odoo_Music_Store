@@ -25,26 +25,42 @@
           <field name="arch" type="xml">
             <form string="Client Information">
               <header>
-                  <button name="clientnamebutton" string="Submit" type="object" states="clientname"/>
-                  <button name="someinfobutton" string="Submit" type="object" states="someinfo"/>
-                  <button name="otherinfobutton" string="Submit" type="object" states="otherinfo"/>
+                  <button name="clientnamebutton" string="Submit"
+                    type="object" states="clientname"/>
+                  <button name="someinfobutton" string="Submit"
+                    type="object" states="someinfo"/>
+                  <button name="otherinfobutton" string="Submit"
+                    type="object" states="otherinfo"/>
 
                   <field name="state" widget="statusbar" />
               </header>
               <sheet>
-                <group string="Client Name" attrs="{'invisible': [('state', '!=', 'clientname')]}">
-                  <label for="firstname" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                <group string="Client Name"
+                  attrs="{'invisible': [('state', '!=', 'clientname')]}">
+                  <label for="firstname"
+                    attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
                   <div>
-                    <field name="firstname" class="oe_inline"  placeholder="First Name" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
-                    <field name="middlename" class="oe_inline" placeholder="Middle Name" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
-                    <field name="lastname" class="oe_inline" placeholder="Last Name" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
-                    <field name="clientname" class="oe_inline" readonly="1" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                    <field name="firstname" class="oe_inline"
+                      placeholder="First Name"
+                      attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                    <field name="middlename" class="oe_inline"
+                      placeholder="Middle Name"
+                      attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                    <field name="lastname" class="oe_inline"
+                      placeholder="Last Name"
+                      attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                    <field name="clientname" class="oe_inline" readonly="1"
+                      attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
                   </div>
-                  <field name="clientname" readonly="1" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                  <field name="clientname" readonly="1"
+                    attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
                 </group>
-                <group string="Client Info" attrs="{'invisible': [('state', '!=', 'someinfo')]}">
-                  <field name="bday" attrs="{'invisible': [('state', '!=', 'someinfo')]}"/>
-                  <field name="age" readonly="1" attrs="{'invisible': [('state', '!=', 'someinfo')]}"/>
+                <group string="Client Info"
+                  attrs="{'invisible': [('state', '!=', 'someinfo')]}">
+                  <field name="bday"
+                    attrs="{'invisible': [('state', '!=', 'someinfo')]}"/>
+                  <field name="age" readonly="1"
+                    attrs="{'invisible': [('state', '!=', 'someinfo')]}"/>
                 </group>
               </sheet>
             </form>
@@ -57,7 +73,8 @@
           <field name="arch" type="xml">
             <form string="Music Store">
               <header>
-                  <button name="approve_button" string="Submit" type="object" states="approve"/>
+                  <button name="approve_button"
+                    string="Submit" type="object" states="approve"/>
 
                   <field name="state" widget="statusbar" />
               </header>
@@ -84,19 +101,23 @@
                   <field name="total"/>
                   <field name="discounted"/>
                   <field name="state_button" widget="selection" />
-                  <field name="percentage_discount" attrs="{'invisible': [('state_button', '!=', 'percentage')]}"/>
-                  <field name="amount_discount" attrs="{'invisible': [('state_button', '!=', 'amount')]}"/>
+                  <field name="percentage_discount"
+                    attrs="{'invisible': [('state_button',
+                          '!=', 'percentage')]}"/>
+                  <field name="amount_discount"
+                    attrs="{'invisible': [('state_button',
+                          '!=', 'amount')]}"/>
                 </group>
               </sheet>
             </form>
           </field>
         </record>
 
-        <record id="client_information_form_action" model="ir.actions.act_window">
-          <field name="name">Cient information</field>
-          <field name="res_model">new_client_info</field>
-          <field name="view_mode">form,tree</field>
-        </record>
+      <record id="client_information_form_action" model="ir.actions.act_window">
+        <field name="name">Cient information</field>
+        <field name="res_model">new_client_info</field>
+        <field name="view_mode">form,tree</field>
+      </record>
 
         <record id="music_library_view_tree" model="ir.ui.view">
           <field name="name">new_music_library.tree</field>
@@ -156,11 +177,15 @@
         </record>
 
         <menuitem id="menu_parent_id" name="Music Store" sequence="1"/>
-        <menuitem id="music_module" parent="menu_parent_id" name="Music Library Store" sequence="1" />
+        <menuitem id="music_module" parent="menu_parent_id"
+          name="Music Library Store" sequence="1" />
 
-        <menuitem action="music_library_form_action" id="Music Library" parent="music_module" />
-        <menuitem action="client_information_form_action" id="Client Information" parent="music_module" />
-        <menuitem action="music_store_form_action" id="Music Store" parent="music_module" />
+        <menuitem action="music_library_form_action" id="Music Library"
+          parent="music_module" />
+        <menuitem action="client_information_form_action"
+          id="Client Information" parent="music_module" />
+        <menuitem action="music_store_form_action" id="Music Store"
+          parent="music_module" />
 
 
       </data>
