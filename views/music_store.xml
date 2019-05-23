@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+      <record id="music_library_form" model="ir.ui.view">
+        <field name="name">music_library</field>
+        <field name="model">new_music_library</field>
+        <field name="arch" type="xml">
+          <form string="Music Library">
+            <sheet>
+              <group>
+                <field name="song_name"/>
+                <field name="year" />
+                <field name="artist" />
+                <field name="album"/>
+                <field name="price"/>
+              </group>
+            </sheet>
+          </form>
+        </field>
+      </record>
+
+        <record id="client_information_form" model="ir.ui.view">
+          <field name="name">client_information</field>
+          <field name="model">new_client_info</field>
+          <field name="arch" type="xml">
+            <form string="Client Information">
+              <header>
+                  <button name="clientnamebutton" string="Submit" type="object" states="clientname"/>
+                  <button name="someinfobutton" string="Submit" type="object" states="someinfo"/>
+                  <button name="otherinfobutton" string="Submit" type="object" states="otherinfo"/>
+
+                  <field name="state" widget="statusbar" />
+              </header>
+              <sheet>
+                <group string="Client Name" attrs="{'invisible': [('state', '!=', 'clientname')]}">
+                  <label for="firstname" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                  <div>
+                    <field name="firstname" class="oe_inline"  placeholder="First Name" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                    <field name="middlename" class="oe_inline" placeholder="Middle Name" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                    <field name="lastname" class="oe_inline" placeholder="Last Name" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                    <field name="clientname" class="oe_inline" readonly="1" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                  </div>
+                  <field name="clientname" readonly="1" attrs="{'invisible': [('state', '!=', 'clientname')]}"/>
+                </group>
+                <group string="Client Info" attrs="{'invisible': [('state', '!=', 'someinfo')]}">
+                  <field name="bday" attrs="{'invisible': [('state', '!=', 'someinfo')]}"/>
+                  <field name="age" readonly="1" attrs="{'invisible': [('state', '!=', 'someinfo')]}"/>
+                </group>
+              </sheet>
+            </form>
+          </field>
+        </record>
+
+        <record id="music_store_form" model="ir.ui.view">
+          <field name="name">Music Store</field>
+          <field name="model">new_music_store</field>
+          <field name="arch" type="xml">
+            <form string="Music Store">
+              <header>
+                  <button name="approve_button" string="Submit" type="object" states="approve"/>
+
+                  <field name="state" widget="statusbar" />
+              </header>
+              <sheet>
+                <group>
+                  <group>
+                      <field name="client_id" class="oe_inline"/>
+                  </group>
+                  <group>
+                      <field name="datepurchase" class="oe_inline"/>
+                  </group>
+                </group>
+                  <field name="purchase_line_ids">
+                      <tree string="Purchase Line IDs" editable="top">
+                        <field name="song_id"/>
+                        <field name="prices"/>
+                        <field name="quantity"/>
+                        <field name="discount"/>
+                        <field name="amount"/>
+                        <field name="discount_invi" invisible="1"/>
+                      </tree>
+                  </field>
+                <group>
+                  <field name="total"/>
+                  <field name="discounted"/>
+                  <field name="state_button" widget="selection" />
+                  <field name="percentage_discount" attrs="{'invisible': [('state_button', '!=', 'percentage')]}"/>
+                  <field name="amount_discount" attrs="{'invisible': [('state_button', '!=', 'amount')]}"/>
+                </group>
+              </sheet>
+            </form>
+          </field>
+        </record>
+
+        <record id="client_information_form_action" model="ir.actions.act_window">
+          <field name="name">Cient information</field>
+          <field name="res_model">new_client_info</field>
+          <field name="view_mode">form,tree</field>
+        </record>
+
+        <record id="music_library_view_tree" model="ir.ui.view">
+          <field name="name">new_music_library.tree</field>
+          <field name="model">new_music_library</field>
+          <field name="arch" type="xml">
+            <tree string="Music Library">
+              <field name="name"/>
+              <field name="artist"/>
+              <field name="album"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="new_music_store_view_tree" model="ir.ui.view">
+          <field name="name">new_music_store.tree</field>
+          <field name="model">new_music_store</field>
+          <field name="arch" type="xml">
+            <tree string="Music Library">
+              <field name="name"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="new_client_info_view_tree" model="ir.ui.view">
+          <field name="name">new_client_info.tree</field>
+          <field name="model">new_client_info</field>
+          <field name="arch" type="xml">
+            <tree string="Music Library">
+              <field name="name"/>
+            </tree>
+          </field>
+        </record>
+
+        <record id="music_libary_view_search" model="ir.ui.view">
+          <field name="name">music_libary.search</field>
+          <field name="model">new_music_library</field>
+          <field name="arch" type="xml">
+            <search string="Search">
+              <field name="song_name"/>
+              <field name="artist"/>
+              <field name="year"/>
+              <field name="album"/>
+            </search>
+          </field>
+        </record>
+
+        <record id="music_library_form_action" model="ir.actions.act_window">
+          <field name="name">Music Library</field>
+          <field name="res_model">new_music_library</field>
+          <field name="view_mode">form,tree</field>
+        </record>
+
+        <record id="music_store_form_action" model="ir.actions.act_window">
+          <field name="name">Music Store</field>
+          <field name="res_model">new_music_store</field>
+          <field name="view_mode">form,tree</field>
+        </record>
+
+        <menuitem id="menu_parent_id" name="Music Store" sequence="1"/>
+        <menuitem id="music_module" parent="menu_parent_id" name="Music Library Store" sequence="1" />
+
+        <menuitem action="music_library_form_action" id="Music Library" parent="music_module" />
+        <menuitem action="client_information_form_action" id="Client Information" parent="music_module" />
+        <menuitem action="music_store_form_action" id="Music Store" parent="music_module" />
+
+
+      </data>
+  </openerp>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Custom report.-->
+<openerp>
+<data>
+  <report
+    id="custom_music_library_reports"
+    model="new_music_store"
+    string="Print Client Purchase"
+    report_type="qweb-pdf"
+    name="music_library_store.music_library_reports"
+    attachment_use="true"
+    file="music_library_store.music_library_reports"
+  />
+
+<template id="music_library_reports">
+  <t t-call="report.html_container">
+    <t t-foreach="docs" t-as="record">
+      <t t-call="report.external_layout">
+        <div class="page">
+            <div class="oe_structure"/>
+            <div class="row">
+                <div class="col-xs-12" style="margin-bottom: 30px">
+                    <style>
+                      table, td, tr, th { border: 1px solid black;}
+                      th {background-color: #f2f2f2;}
+                    </style>
+                  <span class="col-xs-8">Client Name: <strong t-raw="record.name"/> </span>
+                  <span class="col-xs-4">Date of Purchase: <strong t-raw="record.datepurchase"/> </span>
+                    <div class="oe_structure"/>
+                </div>
+                <div class="col-xs-12" style="margin-bottom: 40px">
+                  <table class="table table-condensed">
+                   <thead>
+                       <tr>
+                           <th style="width:35%;">Song Name</th>
+                           <th style="width:15%;">Price</th>
+                           <th style="width:15%;">Quantity</th>
+                           <th style="width:15%;">Discount</th>
+                           <th style="width:20%;">Total</th>
+                       </tr>
+                   </thead>
+                   <tbody class="invoice_tbody">
+                     <tr t-foreach="record.purchase_line_ids" t-as="rec_list">
+                        <td><span t-field="rec_list.song_id.name"/></td>
+                        <td><span t-field="rec_list.prices"/></td>
+                        <td><span t-field="rec_list.quantity"/></td>
+                        <td><span t-field="rec_list.discount"/></td>
+                        <td><span t-field="rec_list.amount"/></td>
+                      </tr>
+                   </tbody>
+                  </table>
+                </div>
+                <div class="row" style="float: left; margin-left: 10px;">
+                  <div class="col-xs-12">
+                    <span>Total: <strong t-raw="record.total"/> </span><br/>
+                    <span>Discount: <strong t-raw="record.discounted"/> </span><br/>
+                    <span>Type of Discount: <strong t-raw="record.state_button"/> </span><br/>
+                    <span t-if="record.state_button == 'percentage'">Discounted Percentage: <strong t-raw="record.percentage_discount"/> </span>
+                    <span t-if="record.state_button == 'amount'">Discounted Amount: <strong t-raw="record.amount_discount"/> </span>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </t>
+    </t>
+  </t>
+</template>
+</data>
+</openerp>
