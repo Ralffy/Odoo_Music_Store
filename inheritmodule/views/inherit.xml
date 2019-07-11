@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+      <!-- Inherit Form view -->
+      <!-- <record id="client_inherit_information_form" model="ir.ui.view">
+        <field name="name">client_inherit_information.form</field>
+        <field name="model">new_client_info</field>
+        <field name="inherit_id" ref="music_library_store.client_information_form"/>
+        <field name="arch" type="xml">
+          <group string="Client Info" position="after">
+            <group string="Other Info" attrs="{'invisible': [('state', '!=', 'otherinfo')]}">
+              <field name="address" attrs="{'invisible': [('state', '!=', 'otherinfo')]}"/>
+              <field name="job" attrs="{'invisible': [('state', '!=', 'otherinfo')]}"/>
+              <field name="sss_number" attrs="{'invisible': [('state', '!=', 'otherinfo')]}"/>
+            </group>
+          </group>
+        </field>
+      </record> -->
+
+      <record id="new_customer_information_view_form" model="ir.ui.view">
+        <field name="name">Customer</field>
+        <field name="model">new_customer_information</field>
+        <field name="arch" type="xml">
+          <form string="Customer">
+            <sheet>
+              <group>
+                <field name="customer_name"/>
+                <field name="products">
+                  <tree string="Products">
+                    <field name="song_name"/>
+                    <field name="price"/>
+                    <field name="quantity"/>
+                    <field name="discount"/>
+                    <field name="amount"/>
+                  </tree>
+                </field>
+              </group>
+            </sheet>
+          </form>
+        </field>
+      </record>
+
+      <record id="new_customer_information_action_form" model="ir.actions.act_window">
+        <field name="name">Customer</field>
+        <field name="res_model">new_customer_information</field>
+        <field name="view_mode">tree,form</field>
+      </record>
+
+      <record id="new_customer_information_view_tree" model="ir.ui.view">
+        <field name="name">Customer</field>
+        <field name="model">new_customer_information</field>
+        <field name="arch" type="xml">
+          <tree string="">
+            <field name="customer_name"/>
+          </tree>
+        </field>
+      </record>
+
+      <menuitem id="menu_new_customer" name="Customer" parent="music_library_store.music_module" action="new_customer_information_action_form"/>
+    </data>
+</openerp>
